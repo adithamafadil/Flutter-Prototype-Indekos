@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "354235843217",
+    "firebase_url": "https://indekosapp.firebaseio.com",
+    "project_id": "indekosapp",
+    "storage_bucket": "indekosapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354235843217:android:f1f1a3e294e62a0d2a3530",
+        "android_client_info": {
+          "package_name": "dev.company.indekosapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354235843217-hegih04d4ue54lbjpa4aer3m8ubkt545.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.company.indekosapp",
+            "certificate_hash": "9850e620c8fb76807401da5928ee8668bcd2ecdd"
+          }
+        },
+        {
+          "client_id": "354235843217-tldh2jl7nnvmgibh8th67si9kggn0dkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUoYCeeUGbYi91Srb1wqCurP13lxCqkVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354235843217-tldh2jl7nnvmgibh8th67si9kggn0dkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
