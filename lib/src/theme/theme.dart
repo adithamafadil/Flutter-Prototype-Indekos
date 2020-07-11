@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../src/theme/constant_colors.dart';
 
 final ThemeData mainTheme = _buildMainTheme();
@@ -35,6 +36,15 @@ TextTheme _mainTextTheme(TextTheme base) {
           fontWeight: FontWeight.w700,
           fontSize: 14,
           color: mainBlack,
+        ),
+        headline5: base.headline5.copyWith(
+          color: mainBlack,
+          fontSize: 26,
+          fontWeight: FontWeight.w700,
+        ),
+        subtitle1: base.subtitle1.copyWith(
+          color: mainBlack.withOpacity(.65),
+          fontSize: 14,
         ),
       )
       .apply(fontFamily: 'Oxygen');

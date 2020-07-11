@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../src/widgets/list_search.dart';
+
 class SearchBar extends StatelessWidget {
   String _searchText = '';
   @override
@@ -20,9 +22,15 @@ class SearchBar extends StatelessWidget {
               vertical: 15,
             ),
             suffixIcon: Material(
+              color: Colors.black26,
               borderRadius: BorderRadius.all(Radius.circular(25)),
               child: InkWell(
-                onTap: () {},
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListSearch(searchText: _searchText),
+                  ),
+                ),
                 child: Icon(
                   Icons.search,
                   color: Colors.black,

@@ -5,7 +5,8 @@ import '../../src/widgets/search_bar.dart';
 import '../../src/widgets/carousel_list.dart';
 import '../../src/widgets/card_container.dart';
 import '../../src/widgets/homestay_type.dart';
-import '../../src/theme/constant_colors.dart';
+import '../../src/models/carousel_data.dart';
+import '../../src/models/recommendation.dart';
 
 class Homescreen extends StatelessWidget {
   @override
@@ -62,26 +63,32 @@ class Homescreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: CardContainer(
+                    height: 200,
                     title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.home, color: mainBlack),
-                            SizedBox(width: 7),
-                            Text(
-                              'Homestay Type',
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                          ],
+                        SizedBox(height: 8),
+                        Text(
+                          'Homestay Type',
+                          style: Theme.of(context).textTheme.headline3,
                         ),
                         SizedBox(height: 28),
                         Row(
                           children: <Widget>[
-                            HomestayType(),
+                            HomestayType(
+                              desc: 'Kosan',
+                              imagePath: 'assets/images/house.svg',
+                            ),
                             SizedBox(width: 12.0),
-                            HomestayType(),
+                            HomestayType(
+                              desc: 'Kontrakan',
+                              imagePath: 'assets/images/property.svg',
+                            ),
                             SizedBox(width: 12.0),
-                            HomestayType(),
+                            HomestayType(
+                              desc: 'Apartemen',
+                              imagePath: 'assets/images/apartment.svg',
+                            ),
                           ],
                         )
                       ],
@@ -97,10 +104,15 @@ class Homescreen extends StatelessWidget {
                   ),
                 ),
                 CarouselList(
-                  containerWidth: 200,
-                  height: 120,
+                  height: 110,
                   scrollDirection: Axis.horizontal,
+                  itemCount: carouselDatas.length,
+                  itemBuilder: (context, index) {
+                    CarouselData _carouselData = carouselDatas[index];
+                    return Recommendation(carouselData: _carouselData);
+                  },
                 ),
+                SizedBox(height: 24),
               ],
             )
           ],

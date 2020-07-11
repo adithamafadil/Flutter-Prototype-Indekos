@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../src/theme/constant_colors.dart';
 
 final BoxDecoration containerDecoration = _buildContainerDecoration();

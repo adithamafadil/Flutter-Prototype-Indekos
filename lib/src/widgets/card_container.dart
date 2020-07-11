@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../src/models/container_decoration.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget title;
-  CardContainer({this.title});
+  final double height;
+
+  CardContainer({this.title, @required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class CardContainer extends StatelessWidget {
         color: Colors.black,
       ),
       child: Container(
-        height: 200,
+        height: height,
         width: MediaQuery.of(context).size.width,
         decoration: containerDecoration,
         child: Padding(
