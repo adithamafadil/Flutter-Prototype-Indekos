@@ -5,11 +5,13 @@ class NetworkImageModel extends StatelessWidget {
   final BlendMode colorBlendMode;
   final Color color;
   final BorderRadius borderRadius;
+  final double width;
 
   NetworkImageModel({
     this.color,
     this.colorBlendMode,
     this.imageUrl,
+    this.width,
     this.borderRadius = const BorderRadius.horizontal(left: Radius.circular(0)),
   });
   @override
@@ -18,6 +20,7 @@ class NetworkImageModel extends StatelessWidget {
       borderRadius: borderRadius,
       child: Image.network(
         imageUrl,
+        width: width,
         fit: BoxFit.cover,
         colorBlendMode: colorBlendMode,
         color: color,

@@ -171,23 +171,28 @@ class _PaymentscreenState extends State<Paymentscreen> {
                         color: Colors.green[300],
                         disabledColor: Colors.grey,
                         disabledElevation: 0,
-                        onPressed: _selectedPayment == null ||
-                                _selectedPeriod == null
-                            ? null
-                            : () {
-                                return {
-                                  _bloc.addToReserved(widget.index),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Confirmedscreen(
-                                          carouselData: widget.carouselData,
-                                          selectedPayment: _selectedPayment,
-                                          selectedPeriod: _selectedPeriod,
+                        onPressed:
+                            _selectedPayment == null || _selectedPeriod == null
+                                ? null
+                                : () {
+                                    return {
+                                      _bloc.addToReserved(
+                                        widget.index,
+                                        _selectedPayment.payment,
+                                        _selectedPeriod.period,
+                                      ),
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Confirmedscreen(
+                                            carouselData: widget.carouselData,
+                                            selectedPayment: _selectedPayment,
+                                            selectedPeriod: _selectedPeriod,
+                                          ),
                                         ),
-                                      ))
-                                };
-                              },
+                                      )
+                                    };
+                                  },
                         child: Text(
                           'Confirm',
                           style: Theme.of(context).textTheme.headline4,

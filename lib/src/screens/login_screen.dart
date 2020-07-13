@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:indekosapp/src/theme/constant_colors.dart';
 
 class Loginscreen extends StatefulWidget {
   @override
@@ -89,10 +88,10 @@ class _LoginscreenState extends State<Loginscreen> {
                     onPressed: () {
                       setState(() {
                         if (_username == "Admin" && _password == "admin123") {
-                          print('object');
+                          Navigator.pushReplacementNamed(context, '/admin');
                         } else if (_username == "User" &&
                             _password == "user123") {
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/home');
                         } else {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(

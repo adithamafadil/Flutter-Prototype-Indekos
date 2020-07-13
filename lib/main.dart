@@ -22,8 +22,10 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => SplashScreen(),
+          '/login': (context) => Loginscreen(),
           '/home': (context) => Homescreen(),
           '/account': (context) => AccountScreen(),
+          '/admin': (context) => AdminScreen(),
         },
       ),
     );

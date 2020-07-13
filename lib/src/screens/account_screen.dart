@@ -26,6 +26,15 @@ class AccountScreen extends StatelessWidget {
           ),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
+            child: Text(
+              'Log out',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
       ),
       body: _reserve.length == 0
           ? Container(
@@ -58,7 +67,6 @@ class AccountScreen extends StatelessWidget {
               itemCount: _reserve.length,
               itemBuilder: (context, index) {
                 int giftIndex = _reserve.keys.toList()[index];
-                int count = _reserve[giftIndex];
                 CarouselData carouselData = carouselDatas[giftIndex];
 
                 return Padding(
@@ -66,7 +74,14 @@ class AccountScreen extends StatelessWidget {
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(12),
                     title: Text(carouselData.name),
-                    trailing: Text('$count'),
+                    trailing: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('${_reserve[giftIndex]['Payment']}'),
+                        Text('${_reserve[giftIndex]['PaymentPeriod']}'),
+                      ],
+                    ),
                     leading: Container(
                       height: 70,
                       width: 70,

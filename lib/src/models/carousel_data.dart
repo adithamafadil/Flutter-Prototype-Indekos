@@ -6,6 +6,7 @@ class CarouselData {
   final String rating;
   final String location;
   final String price;
+  String payment;
 
   CarouselData({
     @required this.name,
@@ -13,6 +14,7 @@ class CarouselData {
     @required this.rating,
     @required this.imageUrl,
     @required this.price,
+    this.payment,
   })  : assert(name != null),
         assert(location != null),
         assert(rating != null),

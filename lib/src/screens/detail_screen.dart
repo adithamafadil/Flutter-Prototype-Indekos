@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:indekosapp/src/provider/reserve_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../src/models/carousel_data.dart';
 import '../../src/theme/constant_colors.dart';
@@ -12,14 +14,29 @@ import '../../src/models/custom_icons.dart';
 import '../../src/widgets/custom_button.dart';
 import '../../src/widgets/network_image_model.dart';
 
-class Detailscreen extends StatelessWidget {
+class Detailscreen extends StatefulWidget {
   final CarouselData carouselData;
   final int index;
 
   Detailscreen({@required this.carouselData, this.index});
 
   @override
+  _DetailscreenState createState() => _DetailscreenState();
+}
+
+class _DetailscreenState extends State<Detailscreen> {
+  @override
   Widget build(BuildContext context) {
+    var _bloc = Provider.of<ReserveProvider>(context);
+    var _reserve = _bloc.reserve;
+    int _roomLeft;
+
+    setState(() {
+      print(_reserve.containsKey(widget.index).toString());
+      _roomLeft = 100;
+      _reserve.containsKey(widget.index) ? _roomLeft -= 1 : _roomLeft;
+    });
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -41,7 +58,7 @@ class Detailscreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                carouselData.price,
+                widget.carouselData.price,
                 style: Theme.of(context).textTheme.headline5,
               ),
               RaisedButton(
@@ -53,8 +70,8 @@ class Detailscreen extends StatelessWidget {
                   context,
                   CupertinoPageRoute(
                     builder: (context) => Paymentscreen(
-                      carouselData: carouselData,
-                      index: index,
+                      carouselData: widget.carouselData,
+                      index: widget.index,
                     ),
                   ),
                 ),
@@ -68,7 +85,7 @@ class Detailscreen extends StatelessWidget {
         ),
       ),
       body: Hero(
-        tag: carouselData.imageUrl,
+        tag: widget.carouselData.imageUrl,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +96,7 @@ class Detailscreen extends StatelessWidget {
                 color: Colors.black26,
                 foregroundDecoration: foregroundDecoration(.45),
                 child: NetworkImageModel(
-                  imageUrl: carouselData.imageUrl,
+                  imageUrl: widget.carouselData.imageUrl,
                 ),
               ),
               Container(
@@ -95,7 +112,7 @@ class Detailscreen extends StatelessWidget {
                         width: 130,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(carouselData.imageUrl),
+                            image: NetworkImage(widget.carouselData.imageUrl),
                             fit: BoxFit.fitWidth,
                           ),
                         ),
@@ -107,27 +124,33 @@ class Detailscreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: <Widget>[
-                    Text(
-                      carouselData.name,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    SizedBox(height: 10),
-                    Row(
+                    Text('$_roomLeft'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Icon(Icons.location_on,
-                            color: mainBlack.withOpacity(.65), size: 14),
-                        SizedBox(width: 7),
                         Text(
-                          carouselData.location,
-                          style: Theme.of(context).textTheme.subtitle1,
+                          widget.carouselData.name,
+                          style: Theme.of(context).textTheme.headline5,
                         ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.location_on,
+                                color: mainBlack.withOpacity(.65), size: 14),
+                            SizedBox(width: 7),
+                            Text(
+                              widget.carouselData.location,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12),
+                        Text(widget.carouselData.rating,
+                            style: TextStyle(fontSize: 16)),
                       ],
                     ),
-                    SizedBox(height: 12),
-                    Text(carouselData.rating, style: TextStyle(fontSize: 16)),
                   ],
                 ),
               ),

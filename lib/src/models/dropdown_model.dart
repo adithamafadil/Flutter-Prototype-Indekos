@@ -8,6 +8,7 @@ class PaymentModel {
       PaymentModel('Ovo'),
       PaymentModel('Gopay'),
       PaymentModel('Cash'),
+      PaymentModel('Transfer (BCA)'),
     ];
   }
 }

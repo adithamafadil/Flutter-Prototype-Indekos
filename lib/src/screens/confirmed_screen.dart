@@ -51,7 +51,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               color: Colors.white,
-              onPressed: () => Navigator.push(
+              onPressed: () => Navigator.pushReplacement(
                 context,
                 CupertinoPageRoute(builder: (context) => Homescreen()),
               ),
@@ -94,7 +94,9 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                           children: <Widget>[
                             SizedBox(height: 12),
                             Text(
-                              'TRANSACTION SUCCESS!',
+                              widget.selectedPayment.payment == 'Transfer (BCA)'
+                                  ? 'PLEASE TRANSFER TO 098-7654-321'
+                                  : 'TRANSACTION SUCCESS!',
                               style: Theme.of(context).textTheme.headline5,
                               textAlign: TextAlign.center,
                             ),

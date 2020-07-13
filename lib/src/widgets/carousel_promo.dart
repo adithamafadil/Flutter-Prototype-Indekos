@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:indekosapp/src/widgets/network_image_model.dart';
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
@@ -18,10 +19,9 @@ final List child = map<Widget>(
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         child: Stack(children: <Widget>[
-          Image.network(
-            i,
-            fit: BoxFit.cover,
-            width: 1000.0,
+          NetworkImageModel(
+            imageUrl: i,
+            width: 1000,
           ),
           Positioned(
             bottom: 0.0,
