@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../src/widgets/custom_dropdown.dart';
 import '../../src/models/carousel_data.dart';
 import '../../src/models/dropdown_model.dart';
 import '../../src/theme/constant_colors.dart';
 import '../../src/screens/confirmed_screen.dart';
+import '../../src/provider/reserve_provider.dart';
 
 class Paymentscreen extends StatefulWidget {
   final CarouselData carouselData;
+  final int index;
 
-  Paymentscreen({@required this.carouselData});
+  Paymentscreen({@required this.carouselData, this.index});
   @override
   _PaymentscreenState createState() => _PaymentscreenState();
 }
@@ -73,6 +76,8 @@ class _PaymentscreenState extends State<Paymentscreen> {
 
   @override
   Widget build(BuildContext context) {
+    var _bloc = Provider.of<ReserveProvider>(context);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -88,7 +93,6 @@ class _PaymentscreenState extends State<Paymentscreen> {
       ),
       body: Stack(
         children: <Widget>[
-          Text('Oke'),
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -125,23 +129,29 @@ class _PaymentscreenState extends State<Paymentscreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Row(
                             children: <Widget>[
-                              CustomDropDown(
-                                child: DropdownButton(
-                                  isExpanded: true,
-                                  items: _dropdownMenuItemsPayment,
-                                  onChanged: onChangeDropdownItemPayment,
-                                  value: _selectedPayment,
-                                  hint: Text('Select Payment'),
+                              DropdownButtonHideUnderline(
+                                child: CustomDropDown(
+                                  child: DropdownButton(
+                                    elevation: 0,
+                                    isExpanded: true,
+                                    items: _dropdownMenuItemsPayment,
+                                    onChanged: onChangeDropdownItemPayment,
+                                    value: _selectedPayment,
+                                    hint: Text('Select Payment'),
+                                  ),
                                 ),
                               ),
                               SizedBox(width: 12),
-                              CustomDropDown(
-                                child: DropdownButton(
-                                  isExpanded: true,
-                                  items: _dropdownMenuItemsPeriod,
-                                  onChanged: onChangeDropdownItemPeriod,
-                                  value: _selectedPeriod,
-                                  hint: Text('Select Period'),
+                              DropdownButtonHideUnderline(
+                                child: CustomDropDown(
+                                  child: DropdownButton(
+                                    elevation: 0,
+                                    isExpanded: true,
+                                    items: _dropdownMenuItemsPeriod,
+                                    onChanged: onChangeDropdownItemPeriod,
+                                    value: _selectedPeriod,
+                                    hint: Text('Select Period'),
+                                  ),
                                 ),
                               ),
                             ],
@@ -161,16 +171,23 @@ class _PaymentscreenState extends State<Paymentscreen> {
                         color: Colors.green[300],
                         disabledColor: Colors.grey,
                         disabledElevation: 0,
-                        onPressed:
-                            _selectedPayment == null || _selectedPeriod == null
-                                ? null
-                                : () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Confirmedscreen(
-                                        carouselData: widget.carouselData,
-                                      ),
-                                    )),
+                        onPressed: _selectedPayment == null ||
+                                _selectedPeriod == null
+                            ? null
+                            : () {
+                                return {
+                                  _bloc.addToReserved(widget.index),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Confirmedscreen(
+                                          carouselData: widget.carouselData,
+                                          selectedPayment: _selectedPayment,
+                                          selectedPeriod: _selectedPeriod,
+                                        ),
+                                      ))
+                                };
+                              },
                         child: Text(
                           'Confirm',
                           style: Theme.of(context).textTheme.headline4,

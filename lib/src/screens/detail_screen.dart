@@ -14,8 +14,9 @@ import '../../src/widgets/network_image_model.dart';
 
 class Detailscreen extends StatelessWidget {
   final CarouselData carouselData;
+  final int index;
 
-  Detailscreen({@required this.carouselData});
+  Detailscreen({@required this.carouselData, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +52,10 @@ class Detailscreen extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) =>
-                        Paymentscreen(carouselData: carouselData),
+                    builder: (context) => Paymentscreen(
+                      carouselData: carouselData,
+                      index: index,
+                    ),
                   ),
                 ),
                 child: Text(

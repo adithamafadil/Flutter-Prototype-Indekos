@@ -8,8 +8,8 @@ import '../../src/widgets/network_image_model.dart';
 
 class SearchedListModel extends StatefulWidget {
   final CarouselData carouselData;
-
-  SearchedListModel({this.carouselData});
+  final int index;
+  SearchedListModel({this.carouselData, this.index});
   @override
   _SearchedListModelState createState() => _SearchedListModelState();
 }
@@ -23,8 +23,10 @@ class _SearchedListModelState extends State<SearchedListModel> {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                Detailscreen(carouselData: widget.carouselData),
+            builder: (context) => Detailscreen(
+              carouselData: widget.carouselData,
+              index: widget.index,
+            ),
           ),
         ),
         child: Hero(

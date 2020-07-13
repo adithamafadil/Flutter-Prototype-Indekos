@@ -23,7 +23,10 @@ class ListSearch extends StatelessWidget {
               itemCount: carouselDatas.length,
               itemBuilder: (context, index) {
                 CarouselData _carouselData = carouselDatas[index];
-                return SearchedListModel(carouselData: _carouselData);
+                return SearchedListModel(
+                  carouselData: _carouselData,
+                  index: index,
+                );
               },
             ),
           ),

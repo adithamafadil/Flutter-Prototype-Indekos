@@ -8,8 +8,9 @@ import '../../src/widgets/network_image_model.dart';
 
 class Recommendation extends StatefulWidget {
   final CarouselData carouselData;
+  final int index;
 
-  Recommendation({this.carouselData});
+  Recommendation({this.carouselData, this.index});
   @override
   _RecommendationState createState() => _RecommendationState();
 }
@@ -23,8 +24,10 @@ class _RecommendationState extends State<Recommendation> {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                Detailscreen(carouselData: widget.carouselData),
+            builder: (context) => Detailscreen(
+              carouselData: widget.carouselData,
+              index: widget.index,
+            ),
           ),
         ),
         child: Hero(

@@ -28,10 +28,13 @@ class Homescreen extends StatelessWidget {
                       'Welcome, User',
                       style: TextStyle(color: Colors.white),
                     ),
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80',
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, '/account'),
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(
+                          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80',
+                        ),
                       ),
                     ),
                   ],
@@ -109,7 +112,10 @@ class Homescreen extends StatelessWidget {
                   itemCount: carouselDatas.length,
                   itemBuilder: (context, index) {
                     CarouselData _carouselData = carouselDatas[index];
-                    return Recommendation(carouselData: _carouselData);
+                    return Recommendation(
+                      carouselData: _carouselData,
+                      index: index,
+                    );
                   },
                 ),
                 SizedBox(height: 24),

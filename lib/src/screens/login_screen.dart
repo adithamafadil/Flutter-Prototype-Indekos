@@ -13,7 +13,8 @@ class Loginscreen extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * .5,
               child: OutlineButton(
-                onPressed: () => Navigator.pushNamed(context, '/home'),
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, '/home'),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[

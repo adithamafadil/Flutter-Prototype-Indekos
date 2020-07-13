@@ -1,14 +1,25 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../src/theme/constant_colors.dart';
 import '../../src/models/carousel_data.dart';
+import '../../src/models/dropdown_model.dart';
+import '../../src/models/container_decoration.dart';
+import '../../src/screens/screens.dart';
 
 class Confirmedscreen extends StatefulWidget {
   final CarouselData carouselData;
-  Confirmedscreen({this.carouselData});
+  final PaymentModel selectedPayment;
+  final PeriodModel selectedPeriod;
+
+  Confirmedscreen({
+    this.carouselData,
+    this.selectedPayment,
+    this.selectedPeriod,
+  });
   @override
   _ConfirmedscreenState createState() => _ConfirmedscreenState();
 }
@@ -19,7 +30,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(milliseconds: 3300), () {
       setState(() {
         _loading = false;
       });
@@ -40,7 +51,10 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               color: Colors.white,
-              onPressed: () => Navigator.pushNamed(context, '/home'),
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => Homescreen()),
+              ),
               child: Text('Back To Home'),
             ),
           ),
@@ -56,9 +70,10 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                   margin: const EdgeInsets.only(
                     left: 36,
                     right: 36,
-                    bottom: 60,
+                    bottom: 36,
                     top: 192,
                   ),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
@@ -66,7 +81,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                     color: backgroundWhite,
                     boxShadow: [
                       BoxShadow(
-                        color: Color(0xFF989898).withOpacity(.5),
+                        color: Colors.black26,
                         offset: Offset(5, 7),
                         blurRadius: 7,
                       )
@@ -128,14 +143,39 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                             Text(
                               widget.carouselData.price,
                               style: Theme.of(context).textTheme.headline5,
-                            )
+                            ),
+                            SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 5,
+                                  ),
+                                  decoration: containerDecoration,
+                                  child: Text(widget.selectedPayment.payment),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 5,
+                                  ),
+                                  decoration: containerDecoration,
+                                  child: Text(widget.selectedPeriod.period),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                 ),
-                Lottie.asset(
-                  'assets/animations/house.json',
-                  repeat: false,
-                  alignment: Alignment.center,
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Lottie.asset(
+                    'assets/animations/house.json',
+                    repeat: false,
+                    height: 210,
+                  ),
                 ),
               ],
             ),
