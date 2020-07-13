@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indekosapp/src/widgets/carousel_promo.dart';
 
 import '../../src/widgets/home_clipper.dart';
 import '../../src/widgets/search_bar.dart';
@@ -63,6 +64,15 @@ class Homescreen extends StatelessWidget {
                 SizedBox(height: 48),
                 SearchBar(),
                 SizedBox(height: 48),
+                Padding(
+                  padding: const EdgeInsets.only(left: 24, bottom: 12),
+                  child: Text(
+                    'Promotions',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ),
+                CarouselPromo(),
+                SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: CardContainer(
