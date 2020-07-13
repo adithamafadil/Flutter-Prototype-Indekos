@@ -51,10 +51,12 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               color: Colors.white,
-              onPressed: () => Navigator.pushReplacement(
-                context,
-                CupertinoPageRoute(builder: (context) => Homescreen()),
-              ),
+              onPressed: _loading == true
+                  ? null
+                  : () => Navigator.pushReplacement(
+                        context,
+                        CupertinoPageRoute(builder: (context) => Homescreen()),
+                      ),
               child: Text('Back To Home'),
             ),
           ),

@@ -13,7 +13,7 @@ class ReserveProvider extends ChangeNotifier {
 
   void clear(index) {
     if (_reserve.containsKey(index)) {
-      _reserve.remove(index);
+      _reserve[index] = {'Status': 'Verified'};
       notifyListeners();
     }
   }

@@ -73,15 +73,19 @@ class AccountScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(12),
-                    title: Text(carouselData.name),
-                    trailing: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('${_reserve[giftIndex]['Payment']}'),
-                        Text('${_reserve[giftIndex]['PaymentPeriod']}'),
+                        Text(carouselData.name),
+                        Text(carouselData.price),
                       ],
                     ),
+                    trailing: _reserve[giftIndex]['Status'] != null
+                        ? Text('${_reserve[giftIndex]['Status']}')
+                        : Text(
+                            'Waiting For\nVerified',
+                            textAlign: TextAlign.end,
+                          ),
                     leading: Container(
                       height: 70,
                       width: 70,

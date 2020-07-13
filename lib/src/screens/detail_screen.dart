@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:indekosapp/src/provider/reserve_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/models/carousel_data.dart';
@@ -13,6 +12,7 @@ import '../../src/models/container_decoration.dart';
 import '../../src/models/custom_icons.dart';
 import '../../src/widgets/custom_button.dart';
 import '../../src/widgets/network_image_model.dart';
+import '../../src/provider/reserve_provider.dart';
 
 class Detailscreen extends StatefulWidget {
   final CarouselData carouselData;
@@ -29,11 +29,9 @@ class _DetailscreenState extends State<Detailscreen> {
   Widget build(BuildContext context) {
     var _bloc = Provider.of<ReserveProvider>(context);
     var _reserve = _bloc.reserve;
-    int _roomLeft;
+    int _roomLeft = 20;
 
     setState(() {
-      print(_reserve.containsKey(widget.index).toString());
-      _roomLeft = 100;
       _reserve.containsKey(widget.index) ? _roomLeft -= 1 : _roomLeft;
     });
 
@@ -125,8 +123,9 @@ class _DetailscreenState extends State<Detailscreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text('$_roomLeft'),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -150,6 +149,10 @@ class _DetailscreenState extends State<Detailscreen> {
                         Text(widget.carouselData.rating,
                             style: TextStyle(fontSize: 16)),
                       ],
+                    ),
+                    Text(
+                      'Room Left: $_roomLeft',
+                      textAlign: TextAlign.end,
                     ),
                   ],
                 ),

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:indekosapp/src/screens/admin_confirmation.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/models/carousel_data.dart';
 import '../../src/provider/reserve_provider.dart';
+import '../../src/screens/admin_confirmation.dart';
 
 class AdminScreen extends StatelessWidget {
   @override
@@ -34,10 +34,12 @@ class AdminScreen extends StatelessWidget {
           ? Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: Text(
-                'Data Penyewaat Saat Ini Kosong!',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline4,
+              child: Center(
+                child: Text(
+                  'Data Penyewaat Saat Ini Kosong!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
               ),
             )
           : ListView.builder(
@@ -54,20 +56,23 @@ class AdminScreen extends StatelessWidget {
                       CupertinoPageRoute(
                         builder: (context) => AdminCorfirmation(
                           carouselData: carouselData,
+                          giftIndex: giftIndex,
                         ),
                       ),
                     ),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12),
                       title: Text(carouselData.name),
-                      trailing: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('${_reserve[giftIndex]['Payment']}'),
-                          Text('${_reserve[giftIndex]['PaymentPeriod']}'),
-                        ],
-                      ),
+                      trailing: _reserve[giftIndex]['Payment'] == null
+                          ? Text('${_reserve[giftIndex]['Status']}')
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text('${_reserve[giftIndex]['Payment']}'),
+                                Text('${_reserve[giftIndex]['PaymentPeriod']}'),
+                              ],
+                            ),
                       leading: Container(
                         height: 70,
                         width: 70,

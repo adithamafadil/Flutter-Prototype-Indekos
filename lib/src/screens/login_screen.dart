@@ -42,6 +42,9 @@ class _LoginscreenState extends State<Loginscreen> {
                         decoration: InputDecoration(
                           labelText: "Username",
                           hintText: "E.g. Admin",
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green),
+                          ),
                         ),
                         onChanged: (String username) {
                           setState(() {
@@ -56,8 +59,12 @@ class _LoginscreenState extends State<Loginscreen> {
                         decoration: InputDecoration(
                           labelText: "Password",
                           hintText: "E.g. admin123",
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green),
+                          ),
                           suffixIcon: IconButton(
                             onPressed: _toggle,
+                            color: Colors.green,
                             icon: Icon(
                               _obscureText
                                   ? Icons.lock_outline
