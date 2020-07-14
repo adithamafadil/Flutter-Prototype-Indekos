@@ -11,9 +11,9 @@ class ReserveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clear(index) {
+  void clear(index, image) {
     if (_reserve.containsKey(index)) {
-      _reserve[index] = {'Status': 'Verified'};
+      _reserve[index] = {'Status': 'Verified', 'Image': image};
       notifyListeners();
     }
   }
