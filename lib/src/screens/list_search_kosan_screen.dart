@@ -6,9 +6,7 @@ import '../../src/models/searched_list_model.dart';
 import '../../src/widgets/carousel_list.dart';
 import '../../src/theme/constant_colors.dart';
 
-class ListSearch extends StatelessWidget {
-  final String searchText;
-  ListSearch({this.searchText});
+class ListSearchKosanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +18,7 @@ class ListSearch extends StatelessWidget {
             child: CarouselList(
               height: 110,
               scrollDirection: Axis.vertical,
-              itemCount: carouselDatas.length,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 CarouselData _carouselData = carouselDatas[index];
                 return SearchedListModel(
@@ -46,7 +44,7 @@ class ListSearch extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Search for $searchText',
+                      'Search for Kosan',
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     CircleAvatar(

@@ -62,7 +62,16 @@ class AdminScreen extends StatelessWidget {
                     ),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12),
-                      title: Text(carouselData.name),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'By: ST. Rogers',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          Text(carouselData.name),
+                        ],
+                      ),
                       trailing: _reserve[giftIndex]['Payment'] == null
                           ? Text('${_reserve[giftIndex]['Status']}')
                           : Column(

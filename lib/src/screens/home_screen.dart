@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:indekosapp/src/widgets/carousel_promo.dart';
 
 import '../../src/widgets/home_clipper.dart';
 import '../../src/widgets/search_bar.dart';
@@ -8,6 +8,8 @@ import '../../src/widgets/card_container.dart';
 import '../../src/widgets/homestay_type.dart';
 import '../../src/models/carousel_data.dart';
 import '../../src/models/recommendation.dart';
+import '../../src/screens/screens.dart';
+import '../../src/widgets/carousel_promo.dart';
 
 class Homescreen extends StatelessWidget {
   @override
@@ -91,16 +93,36 @@ class Homescreen extends StatelessWidget {
                             HomestayType(
                               desc: 'Kosan',
                               imagePath: 'assets/images/house.svg',
+                              onTap: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => ListSearchKosanScreen(),
+                                ),
+                              ),
                             ),
                             SizedBox(width: 12.0),
                             HomestayType(
                               desc: 'Kontrakan',
                               imagePath: 'assets/images/property.svg',
+                              onTap: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) =>
+                                      ListSearchKontrakanScreen(),
+                                ),
+                              ),
                             ),
                             SizedBox(width: 12.0),
                             HomestayType(
                               desc: 'Apartemen',
                               imagePath: 'assets/images/apartment.svg',
+                              onTap: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) =>
+                                      ListSearchApartmentScreen(),
+                                ),
+                              ),
                             ),
                           ],
                         )

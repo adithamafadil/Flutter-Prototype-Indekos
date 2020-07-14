@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../src/models/carousel_data.dart';
 import '../../src/provider/reserve_provider.dart';
+import '../../src/widgets/card_container.dart';
 
 class AdminCorfirmation extends StatelessWidget {
   final CarouselData carouselData;
@@ -67,18 +68,76 @@ class AdminCorfirmation extends StatelessWidget {
             style: Theme.of(context).textTheme.headline5,
           ),
           Text(
-            '${carouselData.price}/${_reserve[giftIndex]['PaymentPeriod']}',
+            '${carouselData.price}',
             style: Theme.of(context).textTheme.headline4,
           ),
-          _reserve[giftIndex]['Status'] != null
-              ? Text('${_reserve[giftIndex]['Status']}')
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: CardContainer(
+              height: 220,
+              title: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 7,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text('${_reserve[giftIndex]['Payment']}'),
-                    Text('${_reserve[giftIndex]['PaymentPeriod']}'),
+                    Text(
+                      'Reserved by',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    SizedBox(height: 28),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80',
+                            ),
+                            radius: 24,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            'ST. Rogers',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    _reserve[giftIndex]['Status'] != null
+                        ? Text(
+                            'Payment ${_reserve[giftIndex]['Status']}',
+                            style: Theme.of(context).textTheme.headline3,
+                          )
+                        : Column(
+                            children: <Widget>[
+                              Text('Payment Detail'),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Text(
+                                    '${_reserve[giftIndex]['Payment']}',
+                                    style:
+                                        Theme.of(context).textTheme.headline3,
+                                  ),
+                                  Text(
+                                    '${_reserve[giftIndex]['PaymentPeriod']}',
+                                    style:
+                                        Theme.of(context).textTheme.headline3,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                   ],
                 ),
+              ),
+            ),
+          )
         ],
       ),
     );

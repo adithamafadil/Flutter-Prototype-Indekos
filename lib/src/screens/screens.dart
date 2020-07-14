@@ -6,3 +6,6 @@ export './payment_screen.dart';
 export './splash_screen.dart';
 export './account_screen.dart';
 export './admin_screen.dart';
+export './list_search_kosan_screen.dart';
+export './list_search_kontrakan_screen.dart';
+export './list_search_apartmen_screen.dart';

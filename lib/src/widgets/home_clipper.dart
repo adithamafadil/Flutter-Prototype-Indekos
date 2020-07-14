@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../src/widgets/network_image_model.dart';
+import './network_image_model.dart';
 
 class HomeClipper extends StatelessWidget {
   final double queryHeight;

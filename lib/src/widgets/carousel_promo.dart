@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:indekosapp/src/widgets/network_image_model.dart';
+
+import './network_image_model.dart';
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];

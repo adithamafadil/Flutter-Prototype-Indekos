@@ -4,14 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 class HomestayType extends StatelessWidget {
   final String imagePath;
   final String desc;
+  final GestureTapCallback onTap;
 
-  HomestayType({this.desc, this.imagePath});
+  HomestayType({this.desc, this.imagePath, this.onTap});
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Column(
           children: <Widget>[
             Container(

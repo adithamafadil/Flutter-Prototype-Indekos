@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../src/theme/constant_colors.dart';
+import './constant_colors.dart';
 
 final ThemeData mainTheme = _buildMainTheme();
 
