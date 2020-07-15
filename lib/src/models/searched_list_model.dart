@@ -29,64 +29,61 @@ class _SearchedListModelState extends State<SearchedListModel> {
             ),
           ),
         ),
-        child: Hero(
-          tag: widget.carouselData.imageUrl,
-          child: Container(
-            decoration: containerDecoration,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  width: 170,
-                  height: 130,
-                  decoration: BoxDecoration(
-                    color: Colors.black26,
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(15),
-                    ),
-                  ),
-                  child: NetworkImageModel(
-                    imageUrl: widget.carouselData.imageUrl,
-                    colorBlendMode: BlendMode.darken,
-                    color: Colors.black26,
-                    borderRadius:
-                        BorderRadius.horizontal(left: Radius.circular(20)),
+        child: Container(
+          decoration: containerDecoration,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: 170,
+                height: 130,
+                decoration: BoxDecoration(
+                  color: Colors.black26,
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(15),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 170, top: 12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          widget.carouselData.name,
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        Text(widget.carouselData.rating),
-                        SizedBox(height: 24),
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.location_on,
-                              size: 15,
-                              color: mainBlack.withOpacity(.5),
+                child: NetworkImageModel(
+                  imageUrl: widget.carouselData.imageUrl,
+                  colorBlendMode: BlendMode.darken,
+                  color: Colors.black26,
+                  borderRadius:
+                      BorderRadius.horizontal(left: Radius.circular(20)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 170, top: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        widget.carouselData.name,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      Text(widget.carouselData.rating),
+                      SizedBox(height: 24),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.location_on,
+                            size: 15,
+                            color: mainBlack.withOpacity(.5),
+                          ),
+                          SizedBox(width: 7),
+                          Text(
+                            widget.carouselData.location,
+                            style: TextStyle(
+                              color: mainBlack.withOpacity(.7),
                             ),
-                            SizedBox(width: 7),
-                            Text(
-                              widget.carouselData.location,
-                              style: TextStyle(
-                                color: mainBlack.withOpacity(.7),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

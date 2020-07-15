@@ -6,7 +6,8 @@ class CarouselData {
   final String rating;
   final String location;
   final String price;
-  String payment;
+  final String priceWeekly;
+  final String priceYearly;
 
   CarouselData({
     @required this.name,
@@ -14,7 +15,8 @@ class CarouselData {
     @required this.rating,
     @required this.imageUrl,
     @required this.price,
-    this.payment,
+    this.priceWeekly,
+    this.priceYearly,
   })  : assert(name != null),
         assert(location != null),
         assert(rating != null),
@@ -30,6 +32,8 @@ List<CarouselData> carouselDatas = [
     imageUrl:
         'https://images.unsplash.com/photo-1565330502541-4937be8552e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
     price: 'IDR 220,000',
+    priceWeekly: 'IDR 55,000',
+    priceYearly: 'IDR 2,640,000',
   ),
   CarouselData(
     name: 'Kos Kampus 2',
@@ -38,6 +42,8 @@ List<CarouselData> carouselDatas = [
     imageUrl:
         'https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
     price: 'IDR 210,000',
+    priceWeekly: 'IDR 52,500',
+    priceYearly: 'IDR 2,520,000',
   ),
   CarouselData(
     name: 'Apartemen Kampus 1',
@@ -46,6 +52,8 @@ List<CarouselData> carouselDatas = [
     imageUrl:
         'https://images.unsplash.com/photo-1524061511843-fd43443e3cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80',
     price: 'IDR 900,000',
+    priceWeekly: 'IDR 225,000',
+    priceYearly: 'IDR 10,800,000',
   ),
   CarouselData(
     name: 'Apartemen Kantor 1',
@@ -54,6 +62,8 @@ List<CarouselData> carouselDatas = [
     imageUrl:
         'https://images.unsplash.com/photo-1486946255434-2466348c2166?ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
     price: 'IDR 700,000',
+    priceWeekly: 'IDR 175,000',
+    priceYearly: 'IDR 8,400,000',
   ),
   CarouselData(
     name: 'Kontrakan',
@@ -62,5 +72,7 @@ List<CarouselData> carouselDatas = [
     imageUrl:
         'https://images.unsplash.com/photo-1537200086021-dd85d29e229f?ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
     price: 'IDR 700,000',
+    priceWeekly: 'IDR 175,000',
+    priceYearly: 'IDR 8,400,000',
   ),
 ];

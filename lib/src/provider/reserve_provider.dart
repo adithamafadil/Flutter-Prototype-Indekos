@@ -4,9 +4,13 @@ class ReserveProvider extends ChangeNotifier {
   Map<dynamic, dynamic> _reserve = {};
   Map<dynamic, dynamic> get reserve => _reserve;
 
-  void addToReserved(index, payment, period) {
+  void addToReserved(index, payment, period, trigger) {
     _reserve[index] = 1;
-    _reserve[index] = {'Payment': payment, 'PaymentPeriod': period};
+    _reserve[index] = {
+      'Payment': payment,
+      'PaymentPeriod': period,
+      'Trigger': trigger,
+    };
 
     notifyListeners();
   }

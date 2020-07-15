@@ -27,10 +27,15 @@ class _PaymentscreenState extends State<Paymentscreen> {
   List<DropdownMenuItem<PeriodModel>> _dropdownMenuItemsPeriod;
   PeriodModel _selectedPeriod;
 
+  String _price;
+  String _text;
+
   @override
   void initState() {
     _dropdownMenuItemsPayment = buildDropdownMenuItemsPayments(_payments);
     _dropdownMenuItemsPeriod = buildDropdownMenuItemsPeriods(_periods);
+    _price = widget.carouselData.price;
+    _text = 'Monthly';
     super.initState();
   }
 
@@ -71,6 +76,16 @@ class _PaymentscreenState extends State<Paymentscreen> {
   onChangeDropdownItemPeriod(PeriodModel selectedPeriod) {
     setState(() {
       _selectedPeriod = selectedPeriod;
+      if (_selectedPeriod.period == _periods[0].period) {
+        _price = widget.carouselData.priceYearly;
+        _text = 'Yearly';
+      } else if (_selectedPeriod.period == _periods[2].period) {
+        _price = widget.carouselData.priceWeekly;
+        _text = 'Weekly';
+      } else {
+        _price = widget.carouselData.price;
+        _text = 'Monthly';
+      }
     });
   }
 
@@ -121,9 +136,18 @@ class _PaymentscreenState extends State<Paymentscreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Text(
-                          widget.carouselData.price,
-                          style: Theme.of(context).textTheme.headline1,
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: '$_text\n',
+                            style: TextStyle(color: Colors.white),
+                            children: [
+                              TextSpan(
+                                text: _price,
+                                style: Theme.of(context).textTheme.headline1,
+                              )
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -180,6 +204,7 @@ class _PaymentscreenState extends State<Paymentscreen> {
                                         widget.index,
                                         _selectedPayment.payment,
                                         _selectedPeriod.period,
+                                        _text,
                                       ),
                                       Navigator.pushReplacement(
                                         context,
@@ -188,6 +213,7 @@ class _PaymentscreenState extends State<Paymentscreen> {
                                             carouselData: widget.carouselData,
                                             selectedPayment: _selectedPayment,
                                             selectedPeriod: _selectedPeriod,
+                                            trigger: _text,
                                           ),
                                         ),
                                       )

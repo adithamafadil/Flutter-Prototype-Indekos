@@ -55,9 +55,17 @@ class _DetailscreenState extends State<Detailscreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                widget.carouselData.price,
-                style: Theme.of(context).textTheme.headline5,
+              RichText(
+                text: TextSpan(
+                  text: 'Monthly\n',
+                  style: TextStyle(color: mainBlack),
+                  children: [
+                    TextSpan(
+                      text: widget.carouselData.price,
+                      style: Theme.of(context).textTheme.headline5,
+                    )
+                  ],
+                ),
               ),
               RaisedButton(
                 shape: RoundedRectangleBorder(

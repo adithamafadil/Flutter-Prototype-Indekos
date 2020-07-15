@@ -14,11 +14,13 @@ class Confirmedscreen extends StatefulWidget {
   final CarouselData carouselData;
   final PaymentModel selectedPayment;
   final PeriodModel selectedPeriod;
+  final String trigger;
 
   Confirmedscreen({
     this.carouselData,
     this.selectedPayment,
     this.selectedPeriod,
+    this.trigger,
   });
   @override
   _ConfirmedscreenState createState() => _ConfirmedscreenState();
@@ -145,7 +147,11 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                             ),
                             SizedBox(height: 24),
                             Text(
-                              widget.carouselData.price,
+                              widget.trigger == 'Monthly'
+                                  ? widget.carouselData.price
+                                  : widget.trigger == 'Yearly'
+                                      ? widget.carouselData.priceYearly
+                                      : widget.carouselData.priceWeekly,
                               style: Theme.of(context).textTheme.headline5,
                             ),
                             SizedBox(height: 12),

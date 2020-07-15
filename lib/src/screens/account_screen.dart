@@ -77,7 +77,13 @@ class AccountScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(carouselData.name),
-                        Text(carouselData.price),
+                        Text(
+                          _reserve[giftIndex]['Trigger'] == 'Monthly'
+                              ? carouselData.price
+                              : _reserve[giftIndex]['Trigger'] == 'Yearly'
+                                  ? carouselData.priceYearly
+                                  : carouselData.priceWeekly,
+                        ),
                       ],
                     ),
                     trailing: _reserve[giftIndex]['Status'] != null
