@@ -23,7 +23,7 @@ class ListSearchApartmentScreen extends StatelessWidget {
                 CarouselData _carouselData = carouselDatas[index + 2];
                 return SearchedListModel(
                   carouselData: _carouselData,
-                  index: index,
+                  index: index + 2,
                 );
               },
             ),

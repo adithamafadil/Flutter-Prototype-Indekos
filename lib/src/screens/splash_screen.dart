@@ -36,7 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlutterLogo(size: 100),
-              Text("Splash Screen", style: TextStyle(fontSize: 16)),
+              SizedBox(height: 24),
+              Text("PT. Busur Rukun Mandiri", style: TextStyle(fontSize: 16)),
             ],
           ),
         ],

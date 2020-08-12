@@ -31,6 +31,14 @@ class _AdminCorfirmationState extends State<AdminCorfirmation> {
     });
   }
 
+  Future getImageStorage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(pickedFile.path);
+    });
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> send() async {
@@ -38,8 +46,6 @@ class _AdminCorfirmationState extends State<AdminCorfirmation> {
       body: 'Your Reservation Transaction Has Been Approved!',
       subject: 'Your Reservation Transaction',
       recipients: ['fadil.adithama@gmail.com'],
-      // attachmentPaths: attachments,
-      // isHTML: isHTML,
     );
 
     String platformResponse;
@@ -96,11 +102,46 @@ class _AdminCorfirmationState extends State<AdminCorfirmation> {
                     ? _reserve[widget.giftIndex]['Status'] != null
                         ? null
                         : () {
-                            _bloc.clear(widget.giftIndex, _image);
+                            _bloc.clear(
+                              widget.giftIndex,
+                              _reserve[widget.giftIndex]['Trigger'],
+                            );
                             Navigator.pushNamed(context, '/admin');
                           }
                     : () {
-                        getImage();
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Center(
+                              child: Text(
+                                'Upload Foto KTP Penyewa',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                FlatButton(
+                                  color: Colors.blueAccent[200],
+                                  onPressed: () {
+                                    getImage();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Camera'),
+                                ),
+                                SizedBox(height: 5),
+                                FlatButton(
+                                  color: Colors.red[200],
+                                  onPressed: () {
+                                    getImageStorage();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Gallery'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
             child: Text(
               _reserve[widget.giftIndex]['Status'] != null
@@ -135,13 +176,18 @@ class _AdminCorfirmationState extends State<AdminCorfirmation> {
                       : widget.carouselData.priceWeekly,
               style: Theme.of(context).textTheme.headline4,
             ),
+            SizedBox(height: 12),
+            _reserve[widget.giftIndex]['Date'] != null
+                ? Text(
+                    'Dipesan Untuk Per-${_reserve[widget.giftIndex]['Date']}')
+                : Container(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: CardContainer(
-                height: _image != null ? 400 : 220,
+                height: _image != null ? 400 : 300,
                 title: Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 5,
+                    vertical: 4,
                     horizontal: 7,
                   ),
                   child: Column(
@@ -160,8 +206,10 @@ class _AdminCorfirmationState extends State<AdminCorfirmation> {
                                     height: 150,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: NetworkImage(
-                                              'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/58efe4ac-b4fd-4406-a793-daf42bf63e44/d62w8pl-f9147095-e08b-4944-97b7-65e5c884e437.jpg/v1/fill/w_400,h_260,q_75,strp/ktp_indonesia_vector_by_gunardi_d62w8pl-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0yNjAiLCJwYXRoIjoiXC9mXC81OGVmZTRhYy1iNGZkLTQ0MDYtYTc5My1kYWY0MmJmNjNlNDRcL2Q2Mnc4cGwtZjkxNDcwOTUtZTA4Yi00OTQ0LTk3YjctNjVlNWM4ODRlNDM3LmpwZyIsIndpZHRoIjoiPD00MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.bPSxKntf4OAoN9f8qTgYWvgHtTI6vg5tZYDUJBoPr8o')),
+                                        image: NetworkImage(
+                                            'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/58efe4ac-b4fd-4406-a793-daf42bf63e44/d62w8pl-f9147095-e08b-4944-97b7-65e5c884e437.jpg/v1/fill/w_400,h_260,q_75,strp/ktp_indonesia_vector_by_gunardi_d62w8pl-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0yNjAiLCJwYXRoIjoiXC9mXC81OGVmZTRhYy1iNGZkLTQ0MDYtYTc5My1kYWY0MmJmNjNlNDRcL2Q2Mnc4cGwtZjkxNDcwOTUtZTA4Yi00OTQ0LTk3YjctNjVlNWM4ODRlNDM3LmpwZyIsIndpZHRoIjoiPD00MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.bPSxKntf4OAoN9f8qTgYWvgHtTI6vg5tZYDUJBoPr8o'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ))
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

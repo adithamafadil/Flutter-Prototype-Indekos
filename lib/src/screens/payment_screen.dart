@@ -128,7 +128,7 @@ class _PaymentscreenState extends State<Paymentscreen> {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.all(12),
-                    height: MediaQuery.of(context).size.height * .17,
+                    height: MediaQuery.of(context).size.height * .275,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: mainBlack.withOpacity(.38),
@@ -181,6 +181,24 @@ class _PaymentscreenState extends State<Paymentscreen> {
                             ],
                           ),
                         ),
+                        Container(
+                          margin: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            trailing: IconButton(
+                              icon: Icon(
+                                Icons.calendar_today,
+                                color: Colors.blue[700],
+                              ),
+                              onPressed: () => _selectDate(context),
+                            ),
+                            title:
+                                Text('${selectedDate.toLocal()}'.split(' ')[0]),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -195,30 +213,32 @@ class _PaymentscreenState extends State<Paymentscreen> {
                         color: Colors.green[300],
                         disabledColor: Colors.grey,
                         disabledElevation: 0,
-                        onPressed:
-                            _selectedPayment == null || _selectedPeriod == null
-                                ? null
-                                : () {
-                                    return {
-                                      _bloc.addToReserved(
-                                        widget.index,
-                                        _selectedPayment.payment,
-                                        _selectedPeriod.period,
-                                        _text,
+                        onPressed: _selectedPayment == null ||
+                                _selectedPeriod == null
+                            ? null
+                            : () {
+                                print(selectedDate.toString().split(' ')[0]);
+                                return {
+                                  _bloc.addToReserved(
+                                    widget.index,
+                                    _selectedPayment.payment,
+                                    _selectedPeriod.period,
+                                    selectedDate.toString().split(' ')[0],
+                                    _text,
+                                  ),
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Confirmedscreen(
+                                        carouselData: widget.carouselData,
+                                        selectedPayment: _selectedPayment,
+                                        selectedPeriod: _selectedPeriod,
+                                        trigger: _text,
                                       ),
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Confirmedscreen(
-                                            carouselData: widget.carouselData,
-                                            selectedPayment: _selectedPayment,
-                                            selectedPeriod: _selectedPeriod,
-                                            trigger: _text,
-                                          ),
-                                        ),
-                                      )
-                                    };
-                                  },
+                                    ),
+                                  )
+                                };
+                              },
                         child: Text(
                           'Confirm',
                           style: Theme.of(context).textTheme.headline4,
@@ -233,5 +253,19 @@ class _PaymentscreenState extends State<Paymentscreen> {
         ],
       ),
     );
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
   }
 }

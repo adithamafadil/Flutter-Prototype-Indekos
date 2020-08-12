@@ -23,7 +23,7 @@ class ListSearchKontrakanScreen extends StatelessWidget {
                 CarouselData _carouselData = carouselDatas[index + 4];
                 return SearchedListModel(
                   carouselData: _carouselData,
-                  index: index,
+                  index: index + 4,
                 );
               },
             ),

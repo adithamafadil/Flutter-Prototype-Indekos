@@ -75,7 +75,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                     left: 36,
                     right: 36,
                     bottom: 36,
-                    top: 192,
+                    top: 148,
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 24),
                   width: MediaQuery.of(context).size.width,
@@ -97,14 +97,29 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(height: 12),
-                            Text(
-                              widget.selectedPayment.payment == 'Transfer (BCA)'
-                                  ? 'PLEASE TRANSFER TO 098-7654-321'
-                                  : 'TRANSACTION SUCCESS!',
-                              style: Theme.of(context).textTheme.headline5,
+                            RichText(
                               textAlign: TextAlign.center,
+                              text: widget.selectedPayment.payment ==
+                                      'Transfer (BCA)'
+                                  ? TextSpan(
+                                      style:
+                                          Theme.of(context).textTheme.headline5,
+                                      text: 'PLEASE TRANSFER TO 098-7654-321\n',
+                                      children: [
+                                          TextSpan(
+                                            text: 'a/n PT. XYZ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline4,
+                                          )
+                                        ])
+                                  : TextSpan(
+                                      style:
+                                          Theme.of(context).textTheme.headline5,
+                                      text: 'TRANSACTION SUCCESS!',
+                                    ),
                             ),
-                            SizedBox(height: 24),
+                            SizedBox(height: 12),
                             Padding(
                               padding: const EdgeInsets.all(12),
                               child: Row(
@@ -145,7 +160,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 24),
+                            SizedBox(height: 12),
                             Text(
                               widget.trigger == 'Monthly'
                                   ? widget.carouselData.price
@@ -155,6 +170,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                               style: Theme.of(context).textTheme.headline5,
                             ),
                             SizedBox(height: 12),
+                            Text('Your Payment Using'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -184,7 +200,7 @@ class _ConfirmedscreenState extends State<Confirmedscreen> {
                   child: Lottie.asset(
                     'assets/animations/house.json',
                     repeat: false,
-                    height: 210,
+                    height: 190,
                   ),
                 ),
               ],
